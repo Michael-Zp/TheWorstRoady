@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Speed = 5;
     public float JumpForce = 5;
+    public EventSystem eventSystem;
 
     private Rigidbody2D _rb;
 
@@ -28,8 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+
         if (Input.GetButtonDown("Jump") && Math.Abs(_rb.velocity.y) < 0.01)
         {
+            eventSystem.triggerSampleEvent("Jump!!!!");
             GetComponent<Rigidbody2D>().velocity = Vector2.up * JumpForce;
         }
 

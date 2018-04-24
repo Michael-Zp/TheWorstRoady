@@ -52,8 +52,11 @@ public class PlayerInventory : MonoBehaviour
 
     public void DestroyActiveItem()
     {
-        Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), _activeItem.OriginalPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
-        RemoveActiveItem();
+        if (HasActiveItem())
+        {
+            Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), _activeItem.OriginalPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
+            RemoveActiveItem();
+        }
     }
 
     public void PunchActiveItemOutOfHand(Vector3 puncherPosition)

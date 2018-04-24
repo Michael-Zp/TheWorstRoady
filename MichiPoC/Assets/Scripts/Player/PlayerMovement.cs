@@ -31,7 +31,31 @@ public class PlayerMovement : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
 
-        transform.position = new Vector3(horizontal, 0.0f, 0.0f) * Time.deltaTime * Speed + transform.position;
+        float signedDirection = horizontal > 0 ? 1 : -1;
+
+        Vector2 position = new Vector2(transform.position.x + signedDirection * GetComponent<BoxCollider2D>().size.x / 2.0f, transform.position.y);
+        Vector2 direction = new Vector2(horizontal, 0).normalized;
+
+        //Debug.DrawRay(position, direction * 1f, Color.red, 1/120f);
+        RaycastHit2D[] hits = new RaycastHit2D[100];
+        ContactFilter2D filter = new ContactFilter2D();
+        Physics2D.Raycast(position, direction, filter, hits, 0.05f);
+
+        bool hitSomething = false;
+
+        foreach(var hit in hits)
+        {
+            if(hit.collider != null && hit.collider.gameObject.tag != "Player")
+            {
+                //Debug.Log("Hit " + hit.collider.gameObject.name);
+                hitSomething = true;
+            }
+        }
+
+        if (!hitSomething)
+        {
+            transform.position = new Vector3(horizontal, 0.0f, 0.0f) * Time.deltaTime * Speed + transform.position;
+        }
     }
 
     private void Jump()

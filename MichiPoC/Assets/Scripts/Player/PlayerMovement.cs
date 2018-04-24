@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float Speed = 5;
     public float JumpForce = 5;
-    public EventSystem eventSystem;
 
     private Rigidbody2D _rb;
+    private bool _canMove = true;
+    private bool _canBeStunned = true;
+    private float _stunTime = 1.25f;
+    private float _stunImmuneTime = 3.0f;
 
     private void Start()
     {
@@ -16,8 +20,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Movement();
-        Jump();
+        if(_canMove)
+        {
+            Movement();
+            Jump();
+        }
     }
 
     private void Movement()
@@ -29,10 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-
         if (Input.GetButtonDown("Jump") && Math.Abs(_rb.velocity.y) < 0.01)
         {
-            eventSystem.triggerSampleEvent("Jump!!!!");
             GetComponent<Rigidbody2D>().velocity = Vector2.up * JumpForce;
         }
 
@@ -46,4 +51,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void StunAndKnockBack(Vector3 puncherPosition)
+    {
+        if(_canBeStunned)
+        {
+            _canMove = false;
+            _canBeStunned = false;
+            StartCoroutine(StunDuration());
+            
+            float direction = transform.position.x > puncherPosition.x ? 1 : -1;
+
+            _rb.AddForce(new Vector2(direction * 100, 50));
+        }
+    }
+
+    private IEnumerator StunDuration()
+    {
+        yield return new WaitForSeconds(_stunTime);
+        
+        _canMove = true;
+
+        yield return new WaitForSeconds(_stunImmuneTime);
+
+        _canBeStunned = true;
+    }
 }

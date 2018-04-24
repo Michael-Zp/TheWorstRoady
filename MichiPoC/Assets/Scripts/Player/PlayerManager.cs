@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public void GroupyHitPlayer()
+    private void Start()
     {
-        throw new NotImplementedException();
+        EventSystem.Instance.GuitarOfPlayerDestroyedEvent += GetComponent<PlayerInventory>().DestroyActiveItem;
+        EventSystem.Instance.StunPlayerEvent += GetComponent<PlayerMovement>().StunAndKnockBack;
+        EventSystem.Instance.PunchGuitarOutOfHandsEvent += GetComponent<PlayerInventory>().PunchActiveItemOutOfHand;
     }
 }

@@ -46,8 +46,28 @@ public class PlayerInventory : MonoBehaviour
 
         if (_activeItem.Health.HasNoHpLeft())
         {
-            Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), _activeItem.OriginalPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
-            _activeItem = null;
+            DestroyActiveItem();
         }
+    }
+
+    public void DestroyActiveItem()
+    {
+        Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), _activeItem.OriginalPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
+        RemoveActiveItem();
+    }
+
+    public void PunchActiveItemOutOfHand(Vector3 puncherPosition)
+    {
+        float direction = transform.position.x > puncherPosition.x ? 1 : -1;
+
+        Vector3 newPosition = transform.position + new Vector3(direction * transform.localScale.x / 2.0f, transform.localScale.y / 2.0f, 0);
+        GameObject obj = Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), newPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
+
+        obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 150, 75));
+
+        obj.GetComponent<Pickable>().OriginalPosition = _activeItem.OriginalPosition;
+        obj.GetComponent<Pickable>().OriginalRotation = _activeItem.OriginalRotation;
+
+        RemoveActiveItem();
     }
 }

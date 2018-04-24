@@ -6,7 +6,6 @@ public class EventOutput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        EventSystem.sampleEvent += displayText;
 
     }
 	

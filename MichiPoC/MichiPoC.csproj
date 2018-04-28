@@ -221,14 +221,15 @@
   <ItemGroup>
     <Compile Include="Assets\EventOutput.cs" />
     <Compile Include="Assets\EventSystem.cs" />
-    <Compile Include="Assets\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackType.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GeneralManagers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\PickableManager.cs" />
+    <Compile Include="Assets\Scripts\GeneralManagers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Goal\GoalManager.cs" />
     <Compile Include="Assets\Scripts\Items\ActiveItem.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
@@ -243,13 +244,20 @@
     <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowMenuOnKeyPress.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSpecificMenu.cs" />
+    <Compile Include="Assets\Scripts\Menu\UpdateEnabledLevels.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerPickupManager.cs" />
     <Compile Include="Assets\Scripts\Player\UseActiveItem.cs" />
-    <Compile Include="Assets\UIManager.cs" />
-    <Compile Include="Assets\UpdateEnabledLevels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Fonts\1001fonts-vtks-rock-garage-band-eula.txt" />
+    <None Include="Assets\Fonts\1001fonts-vtks-rude-metal-eula.txt" />
+    <None Include="Assets\Fonts\READ-ME-license.txt" />
+    <None Include="Assets\Fonts\license.txt" />
+    <None Include="Assets\Fonts\pizzadudedotdk.txt" />
+    <None Include="Assets\Fonts\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

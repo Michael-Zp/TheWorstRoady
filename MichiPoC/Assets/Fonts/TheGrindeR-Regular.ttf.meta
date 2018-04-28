@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: f5c29450144ab12419d4e2dc70c4ea22
+timeCreated: 1524935743
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: The GrindeR
+  fontNames:
+  - The GrindeR
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5ca53693f63f2204c9f6d73fef64202f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

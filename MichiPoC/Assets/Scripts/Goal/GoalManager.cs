@@ -16,7 +16,7 @@ public class GoalManager : MonoBehaviour
         _startTime = Time.time;
     }
 
-    void Update()
+    void LateUpdate()
     {
         UpdateTime();
     }
@@ -30,7 +30,7 @@ public class GoalManager : MonoBehaviour
         }
         else
         {
-            EventSystem.Instance.GameOver();
+            EventSystem.Instance.GameOver("You idiot brought the wrong guitar. Get out!");
             return false;
         }
     }
@@ -43,7 +43,8 @@ public class GoalManager : MonoBehaviour
 
         if (currentTime > MaxTime)
         {
-            EventSystem.Instance.GameOver();
+            EventSystem.Instance.GameOver("To late. You are fired!");
+            Destroy(GetComponent<GoalManager>());
         }
     }
 

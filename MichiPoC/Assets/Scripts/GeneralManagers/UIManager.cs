@@ -4,8 +4,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Text ScoreText;
-    public Text GameOverText;
-    public Text GameWonText;
+    public GameObject GameOver;
+    public Text GameOverReasonText;
+    public GameObject GameWon;
+    public Text GameWonScoreText;
 
     private void Awake()
     {
@@ -26,14 +28,15 @@ public class UIManager : MonoBehaviour
         ScoreText.text = "Score: " + score;
     }
 
-    private void ShowGameOverScreen()
+    private void ShowGameOverScreen(string reason)
     {
-        GameOverText.gameObject.SetActive(true);
+        GameOverReasonText.text = reason;
+        GameOver.gameObject.SetActive(true);
     }
 
     private void ShowGameWonScreen(int score)
     {
-        GameWonText.text += score;
-        GameWonText.gameObject.SetActive(true);
+        GameWonScoreText.text = "Score: " + score;
+        GameWon.gameObject.SetActive(true);
     }
 }

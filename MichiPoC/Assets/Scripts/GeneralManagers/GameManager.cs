@@ -74,16 +74,20 @@ public class GameManager : MonoBehaviour
         EventSystem.Instance.ShowScore(_currentScore);
     }
 
-    private void GameOver()
+    private void GameOver(string reason)
     {
+        if (_gameIsWonOrLost) return;
+
         Time.timeScale = 0.0f;
-        EventSystem.Instance.ShowGameOverScreen();
+        EventSystem.Instance.ShowGameOverScreen(reason);
 
         _gameIsWonOrLost = true;
     }
 
     private void WonGame()
     {
+        if (_gameIsWonOrLost) return;
+
         Time.timeScale = 0.0f;
         EventSystem.Instance.ShowGameWonScreen(_currentScore);
 

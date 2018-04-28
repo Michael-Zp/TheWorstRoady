@@ -8,10 +8,12 @@ public class GoalManager : MonoBehaviour
     public ItemType WantedType;
 
     private Color _defaultColor;
+    private float _startTime;
 
-    void Start()
+    void Awake()
     {
         _defaultColor = SpeachBubble.color;
+        _startTime = Time.time;
     }
 
     void Update()
@@ -23,23 +25,25 @@ public class GoalManager : MonoBehaviour
     {
         if (WantedType == type)
         {
-            GameManager.Instance.WonGame();
+            EventSystem.Instance.GameWon();
             return true;
         }
         else
         {
-            GameManager.Instance.GameOver();
+            EventSystem.Instance.GameOver();
             return false;
         }
     }
 
     private void UpdateTime()
     {
-        TimeText.text = (int)Mathf.Clamp(Mathf.Floor(MaxTime - Time.time), 0, MaxTime) + "";
+        float currentTime = Time.time - _startTime;
 
-        if (Time.time > MaxTime)
+        TimeText.text = (int)Mathf.Clamp(Mathf.Floor(MaxTime - currentTime), 0, MaxTime) + "";
+
+        if (currentTime > MaxTime)
         {
-            GameManager.Instance.GameOver();
+            EventSystem.Instance.GameOver();
         }
     }
 

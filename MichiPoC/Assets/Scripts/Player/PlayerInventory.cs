@@ -5,8 +5,8 @@ public class PlayerInventory : MonoBehaviour
 {
     private ActiveItem _activeItem;
     private List<PassiveItem> _passiveItems = new List<PassiveItem>();
-
-    public bool PickUpItem(ItemType type, Vector3 pickupPosition, Quaternion pickupRotation, bool active, int maxHealth, GameObject prefab)
+    
+    public bool PickUpItem(ItemType type, Vector3 pickupPosition, Quaternion pickupRotation, bool active, int currentHealth, GameObject prefab)
     {
         if (active && _activeItem != null)
         {
@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
         switch (type)
         {
             case ItemType.BlueGuitar:
-                _activeItem = new ActiveItem(type, pickupPosition, pickupRotation, new ItemHealth(maxHealth), prefab);
+                _activeItem = new ActiveItem(type, pickupPosition, pickupRotation, new ItemHealth(currentHealth), prefab);
                 return true;
 
             default:
@@ -70,6 +70,7 @@ public class PlayerInventory : MonoBehaviour
 
         obj.GetComponent<Pickable>().OriginalPosition = _activeItem.OriginalPosition;
         obj.GetComponent<Pickable>().OriginalRotation = _activeItem.OriginalRotation;
+        obj.GetComponent<Pickable>().CurrentHealth = _activeItem.Health.CurrentHealth;
 
         RemoveActiveItem();
     }

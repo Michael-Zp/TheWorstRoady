@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,11 +10,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Text ScoreText;
-    public Text GameOverText;
-    public Text GameWonText;
+    public bool[] UnlockedLevels = { true, false, false };
 
-    private int Score;
+    private int _currentScore;
+    private bool _gameIsWonOrLost = false;
+
+    public void Update()
+    {
+        if(_gameIsWonOrLost)
+        {
+            bool anyRelevantKeyDown = false;
+
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                anyRelevantKeyDown = true;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                anyRelevantKeyDown = true;
+                SceneManager.LoadScene("Menu");
+            }
+
+            if(anyRelevantKeyDown)
+            {
+                _currentScore = 0;
+                Time.timeScale = 1.0f;
+                _gameIsWonOrLost = false;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -27,27 +52,51 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        EventSystem.Instance.GameWonEvent += WonGame;
+        EventSystem.Instance.GameOverEvent += GameOver;
+        EventSystem.Instance.AddScoreEvent += AddScore;
+        EventSystem.Instance.UnlockLevelEvent += UnlockLevel;
     }
 
-
-    public void AddScore(int score)
+    private void OnDestroy()
     {
-        Score += score;
-        ScoreText.text = "Score: " + Score;
+        EventSystem.Instance.GameWonEvent -= WonGame;
+        EventSystem.Instance.GameOverEvent -= GameOver;
+        EventSystem.Instance.AddScoreEvent -= AddScore;
+        EventSystem.Instance.UnlockLevelEvent -= UnlockLevel;
     }
 
-    public void GameOver()
+
+    private void AddScore(int score)
+    {
+        _currentScore += score;
+        EventSystem.Instance.ShowScore(_currentScore);
+    }
+
+    private void GameOver()
     {
         Time.timeScale = 0.0f;
-        Debug.Log("GameOver");
-        GameOverText.gameObject.SetActive(true);
+        EventSystem.Instance.ShowGameOverScreen();
+
+        _gameIsWonOrLost = true;
     }
 
-    public void WonGame()
+    private void WonGame()
     {
         Time.timeScale = 0.0f;
-        Debug.Log("Won");
-        GameWonText.text += Score;
-        GameWonText.gameObject.SetActive(true);
+        EventSystem.Instance.ShowGameWonScreen(_currentScore);
+
+        _gameIsWonOrLost = true;
+
+        HighscoresData.AddHighscore(_currentScore);
+    }
+
+    private void UnlockLevel(int level)
+    {
+        if(level - 1 < UnlockedLevels.Length)
+        {
+            UnlockedLevels[level] = true;
+        }
     }
 }

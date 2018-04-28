@@ -221,6 +221,7 @@
   <ItemGroup>
     <Compile Include="Assets\EventOutput.cs" />
     <Compile Include="Assets\EventSystem.cs" />
+    <Compile Include="Assets\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackType.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyManager.cs" />
@@ -247,6 +248,8 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerPickupManager.cs" />
     <Compile Include="Assets\Scripts\Player\UseActiveItem.cs" />
+    <Compile Include="Assets\UIManager.cs" />
+    <Compile Include="Assets\UpdateEnabledLevels.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class HighscoresData : MonoBehaviour {
+public class HighscoresData : MonoBehaviour
+{
+
+    private static int Score;
 
     private static List<float> Highscores = new List<float>();
 

@@ -9,4 +9,11 @@ public class PlayerManager : MonoBehaviour
         EventSystem.Instance.StunPlayerEvent += GetComponent<PlayerMovement>().StunAndKnockBack;
         EventSystem.Instance.PunchGuitarOutOfHandsEvent += GetComponent<PlayerInventory>().PunchActiveItemOutOfHand;
     }
+
+    private void OnDestroy()
+    {
+        EventSystem.Instance.GuitarOfPlayerDestroyedEvent -= GetComponent<PlayerInventory>().DestroyActiveItem;
+        EventSystem.Instance.StunPlayerEvent -= GetComponent<PlayerMovement>().StunAndKnockBack;
+        EventSystem.Instance.PunchGuitarOutOfHandsEvent -= GetComponent<PlayerInventory>().PunchActiveItemOutOfHand;
+    }
 }

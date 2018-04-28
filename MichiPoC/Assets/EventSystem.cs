@@ -5,6 +5,7 @@ public class EventSystem : MonoBehaviour
 {
     //Delegate Types
     public delegate void VoidVoidHandler();
+    public delegate void VoidIntHandler(int arg);
     public delegate void VoidVector3Handler(Vector3 arg);
 
     //Events
@@ -17,7 +18,26 @@ public class EventSystem : MonoBehaviour
     public event VoidVector3Handler PunchGuitarOutOfHandsEvent;
     public void PunchGuitarOutOfHands(Vector3 pucherPosition) { if (PunchGuitarOutOfHandsEvent != null) PunchGuitarOutOfHandsEvent(pucherPosition); }
 
+    public event VoidVoidHandler GameWonEvent;
+    public void GameWon() { if (GameWonEvent != null) GameWonEvent(); }
 
+    public event VoidVoidHandler GameOverEvent;
+    public void GameOver() { if (GameOverEvent != null) GameOverEvent(); }
+    
+    public event VoidIntHandler AddScoreEvent;
+    public void AddScore(int score) { if (AddScoreEvent != null) AddScoreEvent(score); }
+
+    public event VoidIntHandler ShowGameWonScreenEvent;
+    public void ShowGameWonScreen(int score) { if (ShowGameWonScreenEvent != null) ShowGameWonScreenEvent(score); }
+
+    public event VoidVoidHandler ShowGameOverScreenEvent;
+    public void ShowGameOverScreen() { if (ShowGameOverScreenEvent != null) ShowGameOverScreenEvent(); }
+
+    public event VoidIntHandler ShowScoreEvent;
+    public void ShowScore(int score) { if (ShowScoreEvent != null) ShowScoreEvent(score); }
+
+    public event VoidIntHandler UnlockLevelEvent;
+    public void UnlockLevel(int level) { if (UnlockLevelEvent != null) UnlockLevelEvent(level); }
 
     //Singleton
     private static EventSystem _instance = null;

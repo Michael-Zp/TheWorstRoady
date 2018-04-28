@@ -92,7 +92,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61011984449074122
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -156,8 +156,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   IsActive: 1
-  MaxHealth: 3
+  CurrentHealth: 3
   Prefab: {fileID: 1891798971284260}
+  OriginalPosition: {x: 0, y: 0, z: 0}
+  OriginalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!212 &212037863296396336
 SpriteRenderer:
   m_ObjectHideFlags: 1

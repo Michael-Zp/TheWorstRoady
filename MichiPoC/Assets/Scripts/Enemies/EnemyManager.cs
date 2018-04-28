@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class GroupyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
+    public AttackType AttackType;
+
     public void Die()
     {
         Destroy(gameObject);

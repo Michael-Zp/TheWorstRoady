@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 61518326897351972}
   - component: {fileID: 114008238204782828}
   - component: {fileID: 114182125528502654}
+  - component: {fileID: 114078251362409470}
   m_Layer: 0
   m_Name: Groupy
   m_TagString: Groupy
@@ -135,6 +136,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddb81d145179c54e93d9a74b4f5f3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114078251362409470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1598667659112722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d02e215e10cc3541a7de8ca1ef04906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114182125528502654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e71688864988e42a11549269bb4b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackType: 0
 --- !u!212 &212008114217799468
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -223,7 +223,8 @@
     <Compile Include="Assets\EventSystem.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackType.cs" />
-    <Compile Include="Assets\Scripts\Enemies\GroupyManager.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\GameManager.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\PickableManager.cs" />

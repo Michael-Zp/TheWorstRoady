@@ -38,7 +38,7 @@ public class UseActiveItem : MonoBehaviour
             }
 
             _groupies.Remove(nearestGroupy);
-            nearestGroupy.GetComponent<GroupyManager>().Die();
+            nearestGroupy.GetComponent<EnemyManager>().Die();
             GameManager.Instance.AddScore(1);
             GetComponent<PlayerInventory>().UseActiveItem();
         }

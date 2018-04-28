@@ -2,7 +2,12 @@
 
 public class AttackPlayer : MonoBehaviour
 {
-    public AttackType AttackType;
+    private AttackType _attackType;
+
+    private void Start()
+    {
+        _attackType = GetComponent<EnemyManager>().AttackType;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -14,7 +19,7 @@ public class AttackPlayer : MonoBehaviour
 
     private void Attack()
     {
-        switch(AttackType)
+        switch(_attackType)
         {
             case AttackType.DestroyGuitar:
                 EventSystem.Instance.DestroyGuitarOfPlayer();

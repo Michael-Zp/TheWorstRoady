@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class UseActiveItem : MonoBehaviour
 {
+    public GameObject PlusOnePrefab;
+
     private List<GameObject> _groupies = new List<GameObject>();
     private GoalManager _goal = null;
 
+    private void Start()
+    {
+        EventSystem.Instance.AddScoreEvent += ShowPlusOneScore;
+    }
 
     void Update()
     {
@@ -42,6 +48,13 @@ public class UseActiveItem : MonoBehaviour
             EventSystem.Instance.AddScore(1);
             GetComponent<PlayerInventory>().UseActiveItem();
         }
+    }
+
+    //There is only plus 1 score right now. Thus the dummy variable.
+    private void ShowPlusOneScore(int dummy)
+    {
+        Vector3 startPosition = transform.position + new Vector3(0, transform.lossyScale.x, 0);
+        Instantiate(PlusOnePrefab, startPosition, Quaternion.identity);
     }
 
 

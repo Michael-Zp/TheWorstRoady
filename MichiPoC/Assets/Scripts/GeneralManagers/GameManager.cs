@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
         {
             bool anyRelevantKeyDown = false;
 
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetButtonDown("RestartLevel"))
             {
                 anyRelevantKeyDown = true;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-            else if(Input.GetKeyDown(KeyCode.Escape))
+            else if(Input.GetButtonDown("GoToMenu"))
             {
                 anyRelevantKeyDown = true;
                 SceneManager.LoadScene("Menu");

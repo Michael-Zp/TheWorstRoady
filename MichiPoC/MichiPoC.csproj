@@ -245,6 +245,7 @@
     <Compile Include="Assets\Scripts\Menu\ShowMenuOnKeyPress.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSpecificMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\UpdateEnabledLevels.cs" />
+    <Compile Include="Assets\Scripts\MoveUpAndFadeOut.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
@@ -258,6 +259,7 @@
     <None Include="Assets\Fonts\license.txt" />
     <None Include="Assets\Fonts\pizzadudedotdk.txt" />
     <None Include="Assets\Fonts\readme.txt" />
+    <None Include="Assets\Shader\Stopwatch.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

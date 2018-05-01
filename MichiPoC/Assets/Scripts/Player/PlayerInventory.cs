@@ -1,9 +1,43 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private ActiveItem _activeItem;
+    public GameObject ActiveItemRootObject;
+
+    private ActiveItem __activeItem;
+    private ActiveItem _activeItem {
+        get {
+            return __activeItem;
+        }
+
+        set {
+            __activeItem = value;
+            if(__activeItem != null)
+            {
+                _activeItemGameObject = Instantiate(__activeItem.Prefab, ActiveItemRootObject.transform);
+                _activeItemGameObject.transform.localPosition = Vector3.zero;
+
+                Type[] types = { typeof(Rigidbody2D), typeof(BoxCollider2D) };
+
+                foreach(var type in types)
+                {
+                    foreach (var comp in _activeItemGameObject.GetComponents(type))
+                    {
+                        Destroy(comp);
+                    }
+                }
+            }
+            else
+            {
+                Destroy(_activeItemGameObject);
+                _activeItemGameObject = null;
+            }
+        }
+    }
+    private GameObject _activeItemGameObject = null;
+
     private List<PassiveItem> _passiveItems = new List<PassiveItem>();
     
     public bool PickUpItem(ItemType type, Vector3 pickupPosition, Quaternion pickupRotation, bool active, int currentHealth, GameObject prefab)

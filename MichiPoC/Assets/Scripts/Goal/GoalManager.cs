@@ -3,7 +3,9 @@
 public class GoalManager : MonoBehaviour
 {
     public SpriteRenderer SpeachBubble;
-    public TextMesh TimeText;
+    public SpriteRenderer TimeSprite;
+    public SpriteRenderer FullStopwatch;
+    public SpriteRenderer OnlyEdge;
     public int MaxTime = 60;
     public ItemType WantedType;
 
@@ -39,7 +41,28 @@ public class GoalManager : MonoBehaviour
     {
         float currentTime = Time.time - _startTime;
 
-        TimeText.text = (int)Mathf.Clamp(Mathf.Floor(MaxTime - currentTime), 0, MaxTime) + "";
+        float timeRatio = currentTime / MaxTime;
+
+        TimeSprite.material.SetFloat("_TimeRatio", timeRatio);
+
+        float startBlinkingTime = _startTime + 0.8f * MaxTime;
+
+        if (Time.time > startBlinkingTime)
+        {
+            float blinkFactor = Time.time - startBlinkingTime;
+
+            Color startColorOfStopwatchOrEdge = new Color(1, 1, 1, 1);
+            Color startColorOfTime = new Color(0, 0, 0, 1);
+            Color signalColor = new Color(1, 0, 0, 1);
+
+            float ratio = Mathf.Abs(Mathf.Sin(blinkFactor * 5));
+
+            FullStopwatch.color = Color.Lerp(startColorOfStopwatchOrEdge, signalColor, ratio);
+            OnlyEdge.color = Color.Lerp(startColorOfStopwatchOrEdge, signalColor, ratio);
+
+            Color weakSignalColor = new Color(0.3f, 0, 0, 1);
+            TimeSprite.material.SetColor("_Color", Color.Lerp(startColorOfTime, weakSignalColor, ratio));
+        }
 
         if (currentTime > MaxTime)
         {

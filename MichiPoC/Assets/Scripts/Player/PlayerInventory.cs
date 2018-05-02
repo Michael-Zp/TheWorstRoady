@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public GameObject ActiveItemRootObject;
+    public HealthDisplay HealthDisplay;
 
     private ActiveItem __activeItem;
     private ActiveItem _activeItem {
@@ -51,6 +52,7 @@ public class PlayerInventory : MonoBehaviour
         {
             case ItemType.BlueGuitar:
                 _activeItem = new ActiveItem(type, pickupPosition, pickupRotation, new ItemHealth(currentHealth), prefab);
+                HealthDisplay.DisplayHealth(currentHealth);
                 return true;
 
             default:
@@ -77,6 +79,7 @@ public class PlayerInventory : MonoBehaviour
     public void UseActiveItem()
     {
         _activeItem.Health.TakeDamage();
+        HealthDisplay.DisplayHealth(_activeItem.Health.CurrentHealth);
 
         if (_activeItem.Health.HasNoHpLeft())
         {
@@ -90,6 +93,7 @@ public class PlayerInventory : MonoBehaviour
         {
             Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), _activeItem.OriginalPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
             RemoveActiveItem();
+            HealthDisplay.DisplayHealth(0);
         }
     }
 

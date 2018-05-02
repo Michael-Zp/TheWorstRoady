@@ -30,19 +30,22 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        switch (_attackType)
+        if (!GetComponent<EnemyManager>().Dead)
         {
-            case AttackType.DestroyGuitar:
-                MoveSlowly();
-                break;
+            switch (_attackType)
+            {
+                case AttackType.DestroyGuitar:
+                    MoveSlowly();
+                    break;
 
-            case AttackType.StunPlayer:
-                Dash();
-                break;
+                case AttackType.StunPlayer:
+                    Dash();
+                    break;
 
-            case AttackType.PunchGuitarOutOfHands:
-                MoveFast();
-                break;
+                case AttackType.PunchGuitarOutOfHands:
+                    MoveFast();
+                    break;
+            }
         }
     }
 
@@ -77,7 +80,7 @@ public class EnemyMovement : MonoBehaviour
             _shouldDash = false;
 
             StartCoroutine(DashCooldown());
-            
+
             if (Vector2.Distance(transform.position, _leftDashEndPos) < Vector2.Distance(transform.position, _rightDashEndPos))
             {
                 _dashEndPos = _rightDashEndPos;

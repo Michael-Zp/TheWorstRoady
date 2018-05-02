@@ -251,6 +251,7 @@
     <Compile Include="Assets\Scripts\Intro\MoveToSpot.cs" />
     <Compile Include="Assets\Scripts\Intro\SpeachbubbleManager.cs" />
     <Compile Include="Assets\Scripts\Items\ActiveItem.cs" />
+    <Compile Include="Assets\Scripts\Items\HealthDisplay.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\ItemHealth.cs" />
     <Compile Include="Assets\Scripts\Items\ItemType.cs" />

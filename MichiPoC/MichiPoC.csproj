@@ -219,8 +219,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EventOutput.cs" />
-    <Compile Include="Assets\EventSystem.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackType.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyManager.cs" />
@@ -231,6 +229,11 @@
     <Compile Include="Assets\Scripts\GeneralManagers\PickableManager.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Goal\GoalManager.cs" />
+    <Compile Include="Assets\Scripts\Intro\Conversation.cs" />
+    <Compile Include="Assets\Scripts\Intro\EventOutput.cs" />
+    <Compile Include="Assets\Scripts\Intro\EventSystem.cs" />
+    <Compile Include="Assets\Scripts\Intro\MoveToSpot.cs" />
+    <Compile Include="Assets\Scripts\Intro\SpeachbubbleManager.cs" />
     <Compile Include="Assets\Scripts\Items\ActiveItem.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\ItemHealth.cs" />
@@ -245,12 +248,12 @@
     <Compile Include="Assets\Scripts\Menu\ShowMenuOnKeyPress.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSpecificMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\UpdateEnabledLevels.cs" />
-    <Compile Include="Assets\Scripts\MoveUpAndFadeOut.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerPickupManager.cs" />
     <Compile Include="Assets\Scripts\Player\UseActiveItem.cs" />
+    <Compile Include="Assets\Scripts\UI\MoveUpAndFadeOut.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\1001fonts-vtks-rock-garage-band-eula.txt" />

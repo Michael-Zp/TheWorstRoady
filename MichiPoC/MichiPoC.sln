@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MichiPoC", "MichiPoC.csproj", "{867FF378-EFB1-90ED-CD4A-C8693E4D002F}"
 EndProject
 Global

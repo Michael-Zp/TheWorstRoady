@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 3e0d0cee42063e64b9dfc4b893742120
+timeCreated: 1524935743
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Guttural
+  fontNames:
+  - Guttural
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

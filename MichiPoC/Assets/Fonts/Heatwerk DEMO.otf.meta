@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ed70c9da4a59ca849a48a35ea801da2a
+timeCreated: 1524935743
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Heatwerk DEMO
+  fontNames:
+  - Heatwerk DEMO
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

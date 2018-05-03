@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f7f87b39539a6a048b9b23788712773b
+timeCreated: 1524935743
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: VTKS ROCK GARAGE BAND
+  fontNames:
+  - VTKS ROCK GARAGE BAND
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4ddf1551502583245bd0899a06bb05da
+timeCreated: 1524935743
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Metal Vampire
+  fontNames:
+  - Metal Vampire
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

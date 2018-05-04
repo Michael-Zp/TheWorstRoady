@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GoalManager : MonoBehaviour
 {
     public SpriteRenderer SpeachBubble;
-    public SpriteRenderer TimeSprite;
-    public SpriteRenderer FullStopwatch;
-    public SpriteRenderer OnlyEdge;
+    public RawImage TimeSprite;
+    public RawImage FullStopwatch;
+    public RawImage OnlyEdge;
     public int MaxTime = 60;
     public ItemType WantedType;
 
@@ -32,7 +33,7 @@ public class GoalManager : MonoBehaviour
         }
         else
         {
-            EventSystem.Instance.GameOver("You idiot brought the wrong guitar. Get out!");
+            EventSystem.Instance.GameOver("You idiot brought the wrong guitar. Get out!\n");
             return false;
         }
     }
@@ -42,7 +43,7 @@ public class GoalManager : MonoBehaviour
         float currentTime = Time.time - _startTime;
 
         float timeRatio = currentTime / MaxTime;
-
+        
         TimeSprite.material.SetFloat("_TimeRatio", timeRatio);
 
         float startBlinkingTime = _startTime + 0.8f * MaxTime;
@@ -66,7 +67,7 @@ public class GoalManager : MonoBehaviour
 
         if (currentTime > MaxTime)
         {
-            EventSystem.Instance.GameOver("To late. You are fired!");
+            EventSystem.Instance.GameOver("To late. You are fired!\n");
             Destroy(GetComponent<GoalManager>());
         }
     }

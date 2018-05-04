@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public AttackType AttackType;
     public float respawnTime;
+    public GameObject Blood;
 
     private float tmpRespawnTime;
     private bool dead = false;
@@ -20,6 +22,8 @@ public class EnemyManager : MonoBehaviour
         this.tmpRespawnTime = this.respawnTime;
         this.dead = true;
         GetComponent<Renderer>().material.color = new Color(0, 0, 0, 0.3f);
+        Blood.SetActive(true);
+        StartCoroutine(StopBlood());
     }
 
     private void Update()
@@ -50,5 +54,12 @@ public class EnemyManager : MonoBehaviour
         {
             dead = value;
         }
+    }
+
+    private IEnumerator StopBlood()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        Blood.SetActive(false);
     }
 }

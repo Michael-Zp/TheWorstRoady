@@ -13,6 +13,11 @@ public class UseActiveItem : MonoBehaviour
         EventSystem.Instance.AddScoreEvent += ShowPlusOneScore;
     }
 
+    private void OnDestroy()
+    {
+        EventSystem.Instance.AddScoreEvent -= ShowPlusOneScore;
+    }
+
     void Update()
     {
         //If no action was performed this script should do nothing
@@ -33,20 +38,33 @@ public class UseActiveItem : MonoBehaviour
         } 
         else if (_groupies.Count > 0)
         {
+            bool foundHittableGroupy = false;
+
             GameObject nearestGroupy = _groupies[0];
 
             foreach (var groupy in _groupies)
             {
+                if(groupy.GetComponent<EnemyManager>().Dead)
+                {
+                    continue;
+                }
+                else
+                {
+                    foundHittableGroupy = true;
+                }
+
                 if (Vector3.Distance(groupy.transform.position, transform.position) < Vector3.Distance(nearestGroupy.transform.position, transform.position))
                 {
                     nearestGroupy = groupy;
                 }
             }
-
-            //_groupies.Remove(nearestGroupy);
-            nearestGroupy.GetComponent<EnemyManager>().Die();
-            EventSystem.Instance.AddScore(1);
-            GetComponent<PlayerInventory>().UseActiveItem();
+            
+            if(foundHittableGroupy)
+            {
+                nearestGroupy.GetComponent<EnemyManager>().Die();
+                EventSystem.Instance.AddScore(1);
+                GetComponent<PlayerInventory>().UseActiveItem();
+            }
         }
     }
 

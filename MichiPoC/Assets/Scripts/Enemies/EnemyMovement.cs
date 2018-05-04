@@ -64,10 +64,12 @@ public class EnemyMovement : MonoBehaviour
         if (_direction == -1)
         {
             _direction = transform.position.x < _startPos.x - _moveDistance ? _direction * -1 : _direction;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
             _direction = transform.position.x > _startPos.x + _moveDistance ? _direction * -1 : _direction;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime * _direction), transform.position.y);
@@ -88,6 +90,18 @@ public class EnemyMovement : MonoBehaviour
             else
             {
                 _dashEndPos = _leftDashEndPos;
+            }
+        }
+
+        if(Vector2.Distance(transform.position, _dashEndPos) < 0.025)
+        {
+            if(_dashEndPos == _rightDashEndPos)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
 

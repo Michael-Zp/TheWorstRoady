@@ -40,6 +40,9 @@ public class EventSystem : MonoBehaviour
     public event VoidIntHandler UnlockLevelEvent;
     public void UnlockLevel(int level) { if (UnlockLevelEvent != null) UnlockLevelEvent(level); }
 
+    public event VoidVoidHandler LoadNextLevelEvent;
+    public void LoadNextLevel() { if (LoadNextLevelEvent != null) LoadNextLevelEvent(); }
+
     //Singleton
     private static EventSystem _instance = null;
     public static EventSystem Instance {

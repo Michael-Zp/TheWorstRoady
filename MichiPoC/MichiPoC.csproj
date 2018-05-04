@@ -255,6 +255,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerPickupManager.cs" />
     <Compile Include="Assets\Scripts\Player\UseActiveItem.cs" />
     <Compile Include="Assets\Scripts\UI\MoveUpAndFadeOut.cs" />
+    <Compile Include="Assets\Scripts\UI\Wobble.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\1001fonts-vtks-rock-garage-band-eula.txt" />

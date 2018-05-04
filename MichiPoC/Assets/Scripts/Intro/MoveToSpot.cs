@@ -31,6 +31,7 @@ public class MoveToSpot : MonoBehaviour
     {
         _startWalkTime = Time.time;
         _walk = true;
+        transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     public void StartMovingBack()
@@ -40,6 +41,7 @@ public class MoveToSpot : MonoBehaviour
         Vector3 currentPos = transform.position;
         FinalSpot.position = _originalPos;
         _originalPos = currentPos;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
 }

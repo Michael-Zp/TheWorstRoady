@@ -31,6 +31,15 @@ public class PlayerMovement : MonoBehaviour
     {
         var horizontal = Input.GetAxis("Horizontal");
 
+        if(horizontal > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if(horizontal < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
         float signedDirection = horizontal > 0 ? 1 : -1;
 
         Vector2 position = new Vector2(transform.position.x + signedDirection * GetComponent<BoxCollider2D>().size.x / 2.0f, transform.position.y);

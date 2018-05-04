@@ -19,6 +19,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 _activeItemGameObject = Instantiate(__activeItem.Prefab, ActiveItemRootObject.transform);
                 _activeItemGameObject.transform.localPosition = Vector3.zero;
+                _activeItemGameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                 Type[] types = { typeof(Rigidbody2D), typeof(BoxCollider2D) };
 
@@ -37,6 +38,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
     }
+
     private GameObject _activeItemGameObject = null;
 
     private List<PassiveItem> _passiveItems = new List<PassiveItem>();
@@ -64,6 +66,7 @@ public class PlayerInventory : MonoBehaviour
     public void RemoveActiveItem()
     {
         _activeItem = null;
+        HealthDisplay.DisplayHealth(0);
     }
 
     public ItemType GetTypeOfActiveItem()
@@ -99,6 +102,11 @@ public class PlayerInventory : MonoBehaviour
 
     public void PunchActiveItemOutOfHand(Vector3 puncherPosition)
     {
+        if (!HasActiveItem())
+        {
+            return;
+        }
+
         float direction = transform.position.x > puncherPosition.x ? 1 : -1;
 
         Vector3 newPosition = transform.position + new Vector3(direction * transform.localScale.x / 2.0f, transform.localScale.y / 2.0f, 0);

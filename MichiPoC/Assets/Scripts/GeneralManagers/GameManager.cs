@@ -13,31 +13,44 @@ public class GameManager : MonoBehaviour
     public bool[] UnlockedLevels = { true, false, false };
 
     private int _currentScore;
-    private bool _gameIsWonOrLost = false;
+    private bool _gameIsWon = false;
+    private bool _gameIsLost = false;
 
     public void Update()
     {
-        if(_gameIsWonOrLost)
-        {
-            bool anyRelevantKeyDown = false;
+        bool anyRelevantKeyDown = false;
 
+        if (_gameIsWon || _gameIsLost)
+        {
             if(Input.GetButtonDown("RestartLevel"))
             {
+                Debug.Log("Restart");
                 anyRelevantKeyDown = true;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
             else if(Input.GetButtonDown("GoToMenu"))
             {
+                Debug.Log("Menu");
                 anyRelevantKeyDown = true;
                 SceneManager.LoadScene("Menu");
             }
+        }
 
-            if(anyRelevantKeyDown)
+        if (_gameIsWon)
+        {
+            if (Input.GetButtonDown("GoToNextLevel"))
             {
-                _currentScore = 0;
-                Time.timeScale = 1.0f;
-                _gameIsWonOrLost = false;
+                Debug.Log("Next");
+                anyRelevantKeyDown = true;
+                EventSystem.Instance.LoadNextLevel();
             }
+        }
+        
+        if (anyRelevantKeyDown)
+        {
+            _currentScore = 0;
+            Time.timeScale = 1.0f;
+            _gameIsWon = false;
         }
     }
 
@@ -76,22 +89,22 @@ public class GameManager : MonoBehaviour
 
     private void GameOver(string reason)
     {
-        if (_gameIsWonOrLost) return;
+        if (_gameIsLost) return;
 
         Time.timeScale = 0.0f;
         EventSystem.Instance.ShowGameOverScreen(reason);
 
-        _gameIsWonOrLost = true;
+        _gameIsLost = true;
     }
 
     private void WonGame()
     {
-        if (_gameIsWonOrLost) return;
+        if (_gameIsWon) return;
 
         Time.timeScale = 0.0f;
         EventSystem.Instance.ShowGameWonScreen(_currentScore);
 
-        _gameIsWonOrLost = true;
+        _gameIsWon = true;
 
         HighscoresData.AddHighscore(_currentScore);
     }

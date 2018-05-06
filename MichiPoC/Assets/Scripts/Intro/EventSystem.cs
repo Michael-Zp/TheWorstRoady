@@ -6,6 +6,9 @@ public class EventSystem : MonoBehaviour
     //Delegate Types
     public delegate void VoidVoidHandler();
     public delegate void VoidIntHandler(int arg);
+    public delegate void VoidIntIntHandler(int arg1, int arg2);
+    public delegate void VoidFloatHandler(float arg1);
+    public delegate void VoidFloatBoolHandler(float arg1, bool arg2);
     public delegate void VoidStringHandler(string arg);
     public delegate void VoidVector3Handler(Vector3 arg);
 
@@ -19,29 +22,51 @@ public class EventSystem : MonoBehaviour
     public event VoidVector3Handler PunchGuitarOutOfHandsEvent;
     public void PunchGuitarOutOfHands(Vector3 pucherPosition) { if (PunchGuitarOutOfHandsEvent != null) PunchGuitarOutOfHandsEvent(pucherPosition); }
 
+
+
+
     public event VoidVoidHandler GameWonEvent;
     public void GameWon() { if (GameWonEvent != null) GameWonEvent(); }
 
-    public event VoidStringHandler GameOverEvent;
-    public void GameOver(string reason) { if (GameOverEvent != null) GameOverEvent(reason); }
-    
-    public event VoidIntHandler AddScoreEvent;
-    public void AddScore(int score) { if (AddScoreEvent != null) AddScoreEvent(score); }
+    public event VoidVoidHandler GameOverEvent;
+    public void GameOver() { if (GameOverEvent != null) GameOverEvent(); }
 
-    public event VoidIntHandler ShowGameWonScreenEvent;
-    public void ShowGameWonScreen(int score) { if (ShowGameWonScreenEvent != null) ShowGameWonScreenEvent(score); }
+    public event VoidVoidHandler ShowGameWonScreenEvent;
+    public void ShowGameWonScreen() { if (ShowGameWonScreenEvent != null) ShowGameWonScreenEvent(); }
 
-    public event VoidStringHandler ShowGameOverScreenEvent;
-    public void ShowGameOverScreen(string arg) { if (ShowGameOverScreenEvent != null) ShowGameOverScreenEvent(arg); }
-
-    public event VoidIntHandler ShowScoreEvent;
-    public void ShowScore(int score) { if (ShowScoreEvent != null) ShowScoreEvent(score); }
+    public event VoidVoidHandler ShowGameOverScreenEvent;
+    public void ShowGameOverScreen() { if (ShowGameOverScreenEvent != null) ShowGameOverScreenEvent(); }
 
     public event VoidIntHandler UnlockLevelEvent;
     public void UnlockLevel(int level) { if (UnlockLevelEvent != null) UnlockLevelEvent(level); }
 
     public event VoidVoidHandler LoadNextLevelEvent;
     public void LoadNextLevel() { if (LoadNextLevelEvent != null) LoadNextLevelEvent(); }
+
+
+
+    public event VoidIntHandler ScareOfFanBaseEvent;
+    public void ScareOfFanBase(int numberOfFans) { if (ScareOfFanBaseEvent != null) ScareOfFanBaseEvent(numberOfFans); }
+
+    public event VoidIntHandler GetCloserToBeFiredEvent;
+    public void GetCloserToBeFired(int percentageToIncrease) { if (GetCloserToBeFiredEvent != null) GetCloserToBeFiredEvent(percentageToIncrease); }
+
+    public event VoidIntIntHandler ScareOfFanBaseAndGetCloserToBeFiredEvent;
+    public void ScareOfFanBaseAndGetCloserToBeFired(int numberOfFans, int percentageToIncrease) { if (ScareOfFanBaseEvent != null && GetCloserToBeFiredEvent != null) { ScareOfFanBase(numberOfFans); GetCloserToBeFired(percentageToIncrease); } }
+
+    public event VoidFloatBoolHandler UpdateScareOfFanBaseUIEvent;
+    public void UpdateScareOfFanBaseUI(float arg1, bool arg2) { if (UpdateScareOfFanBaseUIEvent != null) UpdateScareOfFanBaseUIEvent(arg1, arg2); }
+
+    public event VoidFloatBoolHandler UpdateGetCloserToBeUIFiredEvent;
+    public void UpdateGetCloserToBeFiredUI(float arg1, bool arg2) { if (UpdateGetCloserToBeUIFiredEvent != null) UpdateGetCloserToBeUIFiredEvent(arg1, arg2); }
+
+    public event VoidFloatHandler SetScareOfFanBaseUIEvent;
+    public void SetScareOfFanBaseUI(float arg1) { if (SetScareOfFanBaseUIEvent != null) SetScareOfFanBaseUIEvent(arg1); }
+
+    public event VoidFloatHandler SetGetCloserToBeUIFiredEvent;
+    public void SetGetCloserToBeFiredUI(float arg1) { if (SetGetCloserToBeUIFiredEvent != null) SetGetCloserToBeUIFiredEvent(arg1); }
+
+
 
     //Singleton
     private static EventSystem _instance = null;

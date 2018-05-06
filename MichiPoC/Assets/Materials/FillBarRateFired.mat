@@ -6,13 +6,13 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Stopwatch
-  m_Shader: {fileID: 4800000, guid: 913980c6e32563e4aaa7c503de2c1bbd, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_Name: FillBarRateFired
+  m_Shader: {fileID: 4800000, guid: bacd7dd5c7a851c4fb1b931befa02c99, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -59,6 +59,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FillState: 0.12332145
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -69,10 +70,14 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TimeRatio: 0.032476805
+    - _TransitPositive: 0
+    - _TransitionState: 0.14
     - _UVSec: 0
     - _ZWrite: 1
-    - timeRatio: 0
     m_Colors:
-    - _Color: {r: 0.11019304, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OffColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OnColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TransitionColorNegative: {r: 1, g: 0, b: 0, a: 1}
+    - _TransitionColorPositive: {r: 0, g: 1, b: 0, a: 1}

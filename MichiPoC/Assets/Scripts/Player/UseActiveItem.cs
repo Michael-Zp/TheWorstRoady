@@ -3,21 +3,9 @@ using UnityEngine;
 
 public class UseActiveItem : MonoBehaviour
 {
-    public GameObject PlusOnePrefab;
-
     private List<GameObject> _groupies = new List<GameObject>();
     private GoalManager _goal = null;
-
-    private void Start()
-    {
-        EventSystem.Instance.AddScoreEvent += ShowPlusOneScore;
-    }
-
-    private void OnDestroy()
-    {
-        EventSystem.Instance.AddScoreEvent -= ShowPlusOneScore;
-    }
-
+    
     void Update()
     {
         //If no action was performed this script should do nothing
@@ -28,13 +16,9 @@ public class UseActiveItem : MonoBehaviour
 
         if (_goal != null)
         {
-            bool itemGiven = false;
-            itemGiven = _goal.GiveItem(GetComponent<PlayerInventory>().GetTypeOfActiveItem());
+            _goal.GiveItem(GetComponent<PlayerInventory>().GetTypeOfActiveItem());
+            GetComponent<PlayerInventory>().DestroyActiveItem();
 
-            if(itemGiven)
-            {
-                GetComponent<PlayerInventory>().RemoveActiveItem();
-            }
         } 
         else if (_groupies.Count > 0)
         {
@@ -62,19 +46,11 @@ public class UseActiveItem : MonoBehaviour
             if(foundHittableGroupy)
             {
                 nearestGroupy.GetComponent<EnemyManager>().Die();
-                EventSystem.Instance.AddScore(1);
+                EventSystem.Instance.ScareOfFanBaseAndGetCloserToBeFired(10, 5);
                 GetComponent<PlayerInventory>().UseActiveItem();
             }
         }
     }
-
-    //There is only plus 1 score right now. Thus the dummy variable.
-    private void ShowPlusOneScore(int dummy)
-    {
-        Vector3 startPosition = transform.position + new Vector3(0, transform.lossyScale.x, 0);
-        Instantiate(PlusOnePrefab, startPosition, Quaternion.identity);
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

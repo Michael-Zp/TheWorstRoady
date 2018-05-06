@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,43 +9,78 @@ public class UIManager : MonoBehaviour
     public GameObject GameWon;
     public Text GameWonScoreText;
 
-    public List<GameObject> ScoreHeads = new List<GameObject>();
+    public RawImage FanBase;
+    public RawImage RateToBeFired;
 
     private void Awake()
     {
         EventSystem.Instance.ShowGameWonScreenEvent += ShowGameWonScreen;
         EventSystem.Instance.ShowGameOverScreenEvent += ShowGameOverScreen;
-        EventSystem.Instance.ShowScoreEvent += ShowScore;
+        EventSystem.Instance.UpdateScareOfFanBaseUIEvent += UpdateFanBaseUI;
+        EventSystem.Instance.UpdateGetCloserToBeUIFiredEvent += UpdateFireRateUI;
+        EventSystem.Instance.SetScareOfFanBaseUIEvent += SetFanBaseUI;
+        EventSystem.Instance.SetGetCloserToBeUIFiredEvent += SetFireRateUI;
     }
 
     private void OnDestroy()
     {
         EventSystem.Instance.ShowGameWonScreenEvent -= ShowGameWonScreen;
         EventSystem.Instance.ShowGameOverScreenEvent -= ShowGameOverScreen;
-        EventSystem.Instance.ShowScoreEvent -= ShowScore;
+        EventSystem.Instance.UpdateScareOfFanBaseUIEvent += UpdateFanBaseUI;
+        EventSystem.Instance.UpdateGetCloserToBeUIFiredEvent += UpdateFireRateUI;
+        EventSystem.Instance.SetScareOfFanBaseUIEvent += SetFanBaseUI;
+        EventSystem.Instance.SetGetCloserToBeUIFiredEvent += SetFireRateUI;
     }
 
-    private void ShowScore(int score)
+    private void ShowGameOverScreen()
     {
-        for(int i = 0; i < score && i < ScoreHeads.Count; i++)
-        {
-            ScoreHeads[ScoreHeads.Count - 1 - i].SetActive(true);
-        }
-    }
-
-    private void ShowGameOverScreen(string reason)
-    {
-        GameOverReasonText.text = reason;
         GameOver.gameObject.SetActive(true);
     }
 
-    private void ShowGameWonScreen(int score)
+    private void ShowGameWonScreen()
     {
-        string[] scoreText = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
-
-        score = score > 10 ? 10 : score;
-
-        GameWonScoreText.text = "Score: " + scoreText[score] + "\n\n";
         GameWon.gameObject.SetActive(true);
+    }
+
+    private void UpdateFanBaseUI(float rate, bool wasPositive)
+    {
+        UpdateRate(FanBase.material, rate, wasPositive);
+    }
+    
+    private void UpdateFireRateUI(float rate, bool wasPositive)
+    {
+        UpdateRate(RateToBeFired.material, rate, wasPositive);
+    }
+
+    private void UpdateRate(Material shaderMat, float rate, bool wasPositive)
+    {
+        if(wasPositive)
+        {
+            float currentTransitionState = shaderMat.GetFloat("_TransitionState");
+            float nextTransitState = Mathf.Lerp(currentTransitionState, rate, Time.deltaTime);
+
+            shaderMat.SetFloat("_FillState", rate);
+            shaderMat.SetFloat("_TransitionState", nextTransitState);
+            shaderMat.SetFloat("_TransitPositive", 1.0f);
+        }
+        else
+        {
+            float currentRate = shaderMat.GetFloat("_FillState");
+            float nextFillState = Mathf.Lerp(currentRate, rate, Time.deltaTime);
+
+            shaderMat.SetFloat("_FillState", nextFillState);
+            shaderMat.SetFloat("_TransitionState", rate);
+            shaderMat.SetFloat("_TransitPositive", 0.0f);
+        }
+    }
+
+    private void SetFanBaseUI(float rate)
+    {
+        FanBase.material.SetFloat("_FillState", rate);
+    }
+
+    private void SetFireRateUI(float rate)
+    {
+        RateToBeFired.material.SetFloat("_FillState", rate);
     }
 }

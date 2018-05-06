@@ -48,14 +48,16 @@ public class Conversation : MonoBehaviour
         _dialogStrings.Add(new DialogString(MeanBoss, "And sometimes \nyou even hit \nour groupies that \nsneaked up on \nthe stage."));
         _dialogStrings.Add(new DialogString(MeanBoss, "You really are \ntruly horrible."));
         _dialogStrings.Add(new DialogString(FriendlyBoss, "But just the man \nwe need right now."));
-        _dialogStrings.Add(new DialogString(FriendlyBoss, "We want you to \napply as a roady \nat this other band \nand wreck havoc \nthere."));
-        _dialogStrings.Add(new DialogString(FriendlyBoss, "But don`t get \nfired, so be on \ntime and just hit \nsome groupies."));
-        _dialogStrings.Add(new DialogString(FriendlyBoss, "That will do to \nscare their \nfans off."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "We want you to \napply as a roady \nat these other bands \nand wreck havoc \nthere."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "But don`t get \nfired, so be on \nfast with supplies, \nlike guitars."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "To scare of their \nfans just hit \nsome of their \ngroupies on stage."));
         _dialogStrings.Add(new DialogString(FriendlyBoss, "You know how \nto hit groupies, \ndon´t you?"));
         _dialogStrings.Add(new DialogString(MeanBoss, "Just walk to `em \nand smash `em in \nthe head!!!"));
         _dialogStrings.Add(new DialogString(FriendlyBoss, "You have to pick \nup a guitar first."));
-        _dialogStrings.Add(new DialogString(FriendlyBoss, "And the moment \nyou are close \nenough just press \n[Space] / A (XBox) \nto hit them."));
-        _dialogStrings.Add(new DialogString(MeanBoss, "You were the worst \nhere you little \nfucker, but try to be \nthe worst roady \nthe world has \never seen out \nthere."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "Then walk to \nthem by pressing \n[A] or [D] and jump \nby pressing [W]."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "At the moment \nyou are close \nenough just press \n[Space] to hit them."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "Hitting them will \nalso bring you \ncloser to being \nfired, so be \ncautious."));
+        _dialogStrings.Add(new DialogString(MeanBoss, "You were the worst \nhere you little fucker, \nbut try to be the \nworst roady the \nworld has ever \nseen out there."));
         _dialogStrings.Add(new DialogString(MeanBoss, "Then go and \ndon`t fuck it up. \nOr no fuck it up \nbig time, but \nfor them."));
 
         _dialogEvents.Add(new DialogEvent(1, () => { PlayerMover.StartMoving(); }));

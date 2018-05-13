@@ -6,12 +6,10 @@ public class Pickable : MonoBehaviour
     public bool IsActive;
     public int CurrentHealth;
     public GameObject Prefab;
-    public Vector3 OriginalPosition;
     public Quaternion OriginalRotation;
 
     private void Awake()
     {
-        OriginalPosition = transform.position;
         OriginalRotation = transform.rotation;
     }
 }

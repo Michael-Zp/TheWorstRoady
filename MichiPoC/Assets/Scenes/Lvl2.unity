@@ -2164,9 +2164,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelToUnlock: 3
   NextLevel: Lvl2
-  MaxFanBase: 0
-  CurrentFanBase: 0
-  CurrentRateToBeFired: 0
+  MaxFanBase: 150
+  CurrentFanBase: 120
+  CurrentRateToBeFired: 30
 --- !u!4 &424987557
 Transform:
   m_ObjectHideFlags: 0

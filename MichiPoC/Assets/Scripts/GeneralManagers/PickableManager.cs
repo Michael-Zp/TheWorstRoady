@@ -12,11 +12,9 @@ public class PickableManager : MonoBehaviour
 
     public GameObject PickableParentObject;
     [SerializeField]
-    private List<ItemType> ItemTypesForPrefabList;
-    [SerializeField]
-    private List<GameObject> PrefabsForPrefabList;
+    private List<PickableItemType> PickableItemTypeList;
 
-    private Dictionary<ItemType, GameObject> _prefabDictionary = new Dictionary<ItemType, GameObject>();
+    private Dictionary<ItemType, PickableItemType> _prefabDictionary = new Dictionary<ItemType, PickableItemType>();
 
     private void Awake()
     {
@@ -28,25 +26,17 @@ public class PickableManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
 
-
-
-        int maxPossibleIndex = Mathf.Min(ItemTypesForPrefabList.Count, PrefabsForPrefabList.Count);
-
-        for(int i = 0; i < maxPossibleIndex; i++)
+        for (int i = 0; i < PickableItemTypeList.Count; i++)
         {
-            _prefabDictionary.Add(ItemTypesForPrefabList[i], PrefabsForPrefabList[i]);
-        }
-
-        if(ItemTypesForPrefabList.Count != PrefabsForPrefabList.Count)
-        {
-            throw new System.ArgumentException("ItemTypesForPrefabList and PrefabForPrefabList did not contain the same amount of entries. All additional entries after index " + maxPossibleIndex + " were omitted.");
+            _prefabDictionary.Add(PickableItemTypeList[i].Type, PickableItemTypeList[i]);
         }
     }
 
-    public GameObject GetPrefabForType(ItemType type)
+    public PickableItemType GetPickableItemForType(ItemType type)
     {
-        GameObject prefab;
+        PickableItemType prefab;
         _prefabDictionary.TryGetValue(type, out prefab);
 
         return prefab;

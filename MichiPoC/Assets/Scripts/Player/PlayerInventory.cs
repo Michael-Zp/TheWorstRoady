@@ -43,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
 
     private List<PassiveItem> _passiveItems = new List<PassiveItem>();
     
-    public bool PickUpItem(ItemType type, Vector3 pickupPosition, Quaternion pickupRotation, bool active, int currentHealth, GameObject prefab)
+    public bool PickUpItem(ItemType type, Quaternion pickupRotation, bool active, int currentHealth, GameObject prefab)
     {
         if (active && _activeItem != null)
         {
@@ -53,7 +53,7 @@ public class PlayerInventory : MonoBehaviour
         switch (type)
         {
             case ItemType.BlueGuitar:
-                _activeItem = new ActiveItem(type, pickupPosition, pickupRotation, new ItemHealth(currentHealth), prefab);
+                _activeItem = new ActiveItem(type, pickupRotation, new ItemHealth(currentHealth), prefab);
                 HealthDisplay.DisplayHealth(currentHealth);
                 return true;
 
@@ -94,7 +94,8 @@ public class PlayerInventory : MonoBehaviour
     {
         if (HasActiveItem())
         {
-            Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), _activeItem.OriginalPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
+            PickableItemType pickable = PickableManager.Instance.GetPickableItemForType(_activeItem.Type);
+            Instantiate(pickable.Prefab, pickable.GetRandomStartPosition().position, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
             RemoveActiveItem();
             HealthDisplay.DisplayHealth(0);
         }
@@ -110,11 +111,10 @@ public class PlayerInventory : MonoBehaviour
         float direction = transform.position.x > puncherPosition.x ? 1 : -1;
 
         Vector3 newPosition = transform.position + new Vector3(direction * transform.localScale.x / 2.0f, transform.localScale.y / 2.0f, 0);
-        GameObject obj = Instantiate(PickableManager.Instance.GetPrefabForType(_activeItem.Type), newPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
+        GameObject obj = Instantiate(PickableManager.Instance.GetPickableItemForType(_activeItem.Type).Prefab, newPosition, _activeItem.OriginalRotation, PickableManager.Instance.PickableParentObject.transform);
 
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 150, 75));
-
-        obj.GetComponent<Pickable>().OriginalPosition = _activeItem.OriginalPosition;
+        
         obj.GetComponent<Pickable>().OriginalRotation = _activeItem.OriginalRotation;
         obj.GetComponent<Pickable>().CurrentHealth = _activeItem.Health.CurrentHealth;
 

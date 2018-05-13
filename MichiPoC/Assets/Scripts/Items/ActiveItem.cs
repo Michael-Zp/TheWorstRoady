@@ -4,7 +4,7 @@ public class ActiveItem : Item
 {
     public ItemHealth Health;
 
-    public ActiveItem(ItemType type, Vector3 originalPosition, Quaternion originalRotation, ItemHealth health, GameObject prefab) : base(type, originalPosition, originalRotation, prefab)
+    public ActiveItem(ItemType type, Quaternion originalRotation, ItemHealth health, GameObject prefab) : base(type, originalRotation, prefab)
     {
         Health = health;
     }

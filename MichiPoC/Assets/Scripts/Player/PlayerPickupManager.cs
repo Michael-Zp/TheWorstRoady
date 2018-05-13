@@ -8,7 +8,7 @@ public class PlayerPickupManager : MonoBehaviour
 
         if (pickable != null)
         {
-            var itemWasPickedUp = GetComponent<PlayerInventory>().PickUpItem(pickable.Type, pickable.OriginalPosition, pickable.OriginalRotation, pickable.IsActive, pickable.CurrentHealth, pickable.Prefab);
+            var itemWasPickedUp = GetComponent<PlayerInventory>().PickUpItem(pickable.Type, pickable.OriginalRotation, pickable.IsActive, pickable.CurrentHealth, pickable.Prefab);
 
             if(itemWasPickedUp)
             {

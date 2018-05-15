@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -8,24 +9,22 @@ public class EnemyMovement : MonoBehaviour
     private float _direction = -1;
     private float _moveDistance;
 
-    private float _slowMoveSpeed = 0.15f;
-    private float _fastMoveSpeed = 0.75f;
-    private float _dashSpeed = 15.0f;
-    private float _dashCooldown = 2.0f;
+    private float _slowMoveSpeed = 1.5f;
+    private float _fastMoveSpeed = 2.5f;
+    private float _dashSpeed = 10.0f;
+    private float _dashCooldown = 3.0f;
 
     private bool _shouldDash = true;
-    private Vector2 _dashEndPos;
+    private float _dashEndXPos;
     private Vector2 _rightDashEndPos;
     private Vector2 _leftDashEndPos;
+    private Vector2 _lastDashPos;
 
     private void Start()
     {
         _attackType = GetComponent<EnemyManager>().AttackType;
         _startPos = transform.position;
-        _moveDistance = transform.lossyScale.x / 4.0f;
-        _rightDashEndPos = _startPos + new Vector2(_moveDistance, 0);
-        _leftDashEndPos = _startPos - new Vector2(_moveDistance, 0);
-        _dashEndPos = _leftDashEndPos;
+        _moveDistance = transform.lossyScale.x * 1.2f;
     }
 
     private void Update()
@@ -63,12 +62,10 @@ public class EnemyMovement : MonoBehaviour
     {
         if (_direction == -1)
         {
-            _direction = transform.position.x < _startPos.x - _moveDistance ? _direction * -1 : _direction;
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            _direction = transform.position.x > _startPos.x + _moveDistance ? _direction * -1 : _direction;
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
@@ -81,31 +78,35 @@ public class EnemyMovement : MonoBehaviour
         {
             _shouldDash = false;
 
+            _rightDashEndPos = transform.Position2D() + new Vector2(_moveDistance, 0);
+            _leftDashEndPos = transform.Position2D() - new Vector2(_moveDistance, 0);
+
             StartCoroutine(DashCooldown());
 
-            if (Vector2.Distance(transform.position, _leftDashEndPos) < Vector2.Distance(transform.position, _rightDashEndPos))
+            if (_direction == 1)
             {
-                _dashEndPos = _rightDashEndPos;
+                _dashEndXPos = _rightDashEndPos.x;
             }
             else
             {
-                _dashEndPos = _leftDashEndPos;
+                _dashEndXPos = _leftDashEndPos.x;
             }
         }
 
-        if(Vector2.Distance(transform.position, _dashEndPos) < 0.025)
+        if(Math.Abs(transform.position.x - _dashEndXPos) < 0.025)
         {
-            if(_dashEndPos == _rightDashEndPos)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
+            if(_direction == 1)
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
 
-        transform.position = Vector2.Lerp(transform.position, _dashEndPos, Time.deltaTime * _dashSpeed);
+        _lastDashPos = transform.Position2D();
+        transform.position = new Vector2(Mathf.Lerp(transform.position.x, _dashEndXPos, Time.deltaTime * _dashSpeed), transform.position.y);
     }
 
     private IEnumerator DashCooldown()
@@ -115,5 +116,16 @@ public class EnemyMovement : MonoBehaviour
         _shouldDash = true;
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        _direction *= -1;
+
+        if(_attackType == AttackType.StunPlayer)
+        {
+            _dashEndXPos = _lastDashPos.x;
+            transform.SetPosition2D(_lastDashPos);
+        }
+    }
 
 }

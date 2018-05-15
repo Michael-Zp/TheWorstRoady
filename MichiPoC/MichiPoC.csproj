@@ -312,12 +312,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AnimationController.cs" />
-    <Compile Include="Assets\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\AttackType.cs" />
+    <Compile Include="Assets\Scripts\Enemies\CheckForFloorHit.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyEnableDisableComponents.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SpawnEnemies.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\GameManager.cs" />
     <Compile Include="Assets\Scripts\GeneralManagers\LevelManager.cs" />
@@ -345,6 +347,7 @@
     <Compile Include="Assets\Scripts\Menu\ShowMenuOnKeyPress.cs" />
     <Compile Include="Assets\Scripts\Menu\ShowSpecificMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\UpdateEnabledLevels.cs" />
+    <Compile Include="Assets\Scripts\Player\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
@@ -352,6 +355,9 @@
     <Compile Include="Assets\Scripts\Player\UseActiveItem.cs" />
     <Compile Include="Assets\Scripts\UI\MoveUpAndFadeOut.cs" />
     <Compile Include="Assets\Scripts\UI\Wobble.cs" />
+    <Compile Include="Assets\Scripts\Util\TransformExtension.cs" />
+    <Compile Include="Assets\Scripts\Util\Vector2Extension.cs" />
+    <Compile Include="Assets\Scripts\Util\Vector3Extension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\1001fonts-vtks-rock-garage-band-eula.txt" />

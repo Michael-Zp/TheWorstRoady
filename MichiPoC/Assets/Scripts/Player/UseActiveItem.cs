@@ -3,16 +3,23 @@ using UnityEngine;
 
 public class UseActiveItem : MonoBehaviour
 {
+    public Animator Animator;
+
     private List<GameObject> _groupies = new List<GameObject>();
     private GoalManager _goal = null;
     
     void Update()
     {
+        CheckIfToShowActiveItemAgain();
+
         //If no action was performed this script should do nothing
         if (!Input.GetButtonDown("Action") || !GetComponent<PlayerInventory>().HasActiveItem())
         {
             return;
         }
+
+
+
 
         if (_goal != null)
         {
@@ -20,35 +27,52 @@ public class UseActiveItem : MonoBehaviour
             GetComponent<PlayerInventory>().DestroyActiveItem();
 
         } 
-        else if (_groupies.Count > 0)
+        else 
         {
-            bool foundHittableGroupy = false;
+            Animator.SetTrigger("Attacking");
+            GetComponent<PlayerInventory>().HideActiveItem();
 
-            GameObject nearestGroupy = _groupies[0];
-
-            foreach (var groupy in _groupies)
+            if (_groupies.Count > 0)
             {
-                if(groupy.GetComponent<EnemyManager>().Dead)
+                bool foundHittableGroupy = false;
+
+                GameObject nearestGroupy = _groupies[0];
+
+                foreach (var groupy in _groupies)
                 {
-                    continue;
-                }
-                else
-                {
-                    foundHittableGroupy = true;
+                    if (groupy.GetComponent<EnemyManager>().Dead)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        foundHittableGroupy = true;
+                    }
+
+                    if (Vector3.Distance(groupy.transform.position, transform.position) < Vector3.Distance(nearestGroupy.transform.position, transform.position))
+                    {
+                        nearestGroupy = groupy;
+                    }
                 }
 
-                if (Vector3.Distance(groupy.transform.position, transform.position) < Vector3.Distance(nearestGroupy.transform.position, transform.position))
+                if (foundHittableGroupy)
                 {
-                    nearestGroupy = groupy;
+                    nearestGroupy.GetComponent<EnemyManager>().Die();
+                    EventSystem.Instance.ScareOfFanBaseAndGetCloserToBeFired(10, 5);
+                    GetComponent<PlayerInventory>().UseActiveItem();
                 }
             }
-            
-            if(foundHittableGroupy)
-            {
-                nearestGroupy.GetComponent<EnemyManager>().Die();
-                EventSystem.Instance.ScareOfFanBaseAndGetCloserToBeFired(10, 5);
-                GetComponent<PlayerInventory>().UseActiveItem();
-            }
+        }
+    }
+
+    private void CheckIfToShowActiveItemAgain()
+    {
+        bool isAttacking = Animator.GetCurrentAnimatorStateInfo(0).IsName("PlayerAttack");
+
+        if (!isAttacking && GetComponent<PlayerInventory>().HasActiveItem())
+        {
+
+            GetComponent<PlayerInventory>().ShowActiveItem();
         }
     }
 

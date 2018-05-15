@@ -63,6 +63,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+
     public void RemoveActiveItem()
     {
         _activeItem = null;
@@ -73,6 +74,7 @@ public class PlayerInventory : MonoBehaviour
     {
         return _activeItem.Type;
     }
+
 
     public bool HasActiveItem()
     {
@@ -119,5 +121,15 @@ public class PlayerInventory : MonoBehaviour
         obj.GetComponent<Pickable>().CurrentHealth = _activeItem.Health.CurrentHealth;
 
         RemoveActiveItem();
+    }
+
+    public void ShowActiveItem()
+    {
+        _activeItemGameObject.SetActive(true);
+    }
+
+    public void HideActiveItem()
+    {
+        _activeItemGameObject.SetActive(false);
     }
 }

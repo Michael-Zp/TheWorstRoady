@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Speed = 5;
     public float JumpForce = 5;
+    public Animator Animator;
 
     private Rigidbody2D _rb;
     private bool _canMove = true;
@@ -39,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+
+        Animator.SetFloat("MoveSpeed", Math.Abs(horizontal));
 
         float signedDirection = horizontal > 0 ? 1 : -1;
 

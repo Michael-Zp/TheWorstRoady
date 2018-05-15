@@ -40,6 +40,16 @@ public class GoalManager : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            ItemType type;
+            if(other.gameObject.GetComponent<PlayerManager>().GetActiveItem(out type))
+            {
+                if(type == WantedType)
+                {
+                    SpeachBubble.color = Color.green;
+                    return;
+                }
+            }
+
             SpeachBubble.color = Color.red;
         }
     }

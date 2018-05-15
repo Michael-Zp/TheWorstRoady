@@ -23,7 +23,9 @@ public class UseActiveItem : MonoBehaviour
 
         if (_goal != null)
         {
-            _goal.GiveItem(GetComponent<PlayerInventory>().GetTypeOfActiveItem());
+            ItemType type;
+            GetComponent<PlayerInventory>().GetTypeOfActiveItem(out type);
+            _goal.GiveItem(type);
             GetComponent<PlayerInventory>().DestroyActiveItem();
 
         } 
@@ -40,7 +42,7 @@ public class UseActiveItem : MonoBehaviour
 
                 foreach (var groupy in _groupies)
                 {
-                    if (groupy.GetComponent<EnemyManager>().Dead)
+                    if (groupy.GetComponent<EnemyManager>().Dead)   
                     {
                         continue;
                     }
@@ -57,7 +59,7 @@ public class UseActiveItem : MonoBehaviour
 
                 if (foundHittableGroupy)
                 {
-                    nearestGroupy.GetComponent<EnemyManager>().Die();
+                    nearestGroupy.GetComponent<EnemyManager>().Die(transform.Position2D());
                     EventSystem.Instance.ScareOfFanBaseAndGetCloserToBeFired(10, 5);
                     GetComponent<PlayerInventory>().UseActiveItem();
                 }

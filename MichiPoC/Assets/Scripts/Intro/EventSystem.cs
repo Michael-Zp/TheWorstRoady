@@ -11,6 +11,7 @@ public class EventSystem : MonoBehaviour
     public delegate void VoidFloatBoolHandler(float arg1, bool arg2);
     public delegate void VoidStringHandler(string arg);
     public delegate void VoidVector3Handler(Vector3 arg);
+    public delegate int IntVoidHandler();
 
     //Events
     public event VoidVoidHandler GuitarOfPlayerDestroyedEvent;
@@ -66,6 +67,21 @@ public class EventSystem : MonoBehaviour
     public event VoidFloatHandler SetGetCloserToBeUIFiredEvent;
     public void SetGetCloserToBeFiredUI(float arg1) { if (SetGetCloserToBeUIFiredEvent != null) SetGetCloserToBeUIFiredEvent(arg1); }
 
+
+
+    public event IntVoidHandler GetHowManyEnemiesAreInLevelEvent;
+    public int GetHowManyEnemiesAreInLevel() { if (GetHowManyEnemiesAreInLevelEvent != null) return GetHowManyEnemiesAreInLevelEvent(); return 0; }
+
+    public event IntVoidHandler GetMaxEnemiesInLevelEvent;
+    public int GetMaxEnemiesInLevel() { if (GetMaxEnemiesInLevelEvent != null) return GetMaxEnemiesInLevelEvent(); return 0; }
+
+    public event VoidVoidHandler IncrementEnemiesInLevelEvent;
+    public void IncrementEnemiesInLevel() { if (IncrementEnemiesInLevelEvent != null) IncrementEnemiesInLevelEvent(); }
+
+    public event VoidVoidHandler DecrementEnemiesInLevelEvent;
+    public void DecrementEnemiesInLevel() { if (DecrementEnemiesInLevelEvent != null) DecrementEnemiesInLevelEvent(); }
+
+    
 
 
     //Singleton

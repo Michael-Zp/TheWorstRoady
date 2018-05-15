@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61205121583012282}
   - component: {fileID: 61134925755531396}
   - component: {fileID: 50027036342299834}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Guitar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,6 @@ MonoBehaviour:
   IsActive: 1
   CurrentHealth: 3
   Prefab: {fileID: 1031583928555420}
-  OriginalPosition: {x: 0, y: 0, z: 0}
   OriginalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!212 &212130049211603680
 SpriteRenderer:

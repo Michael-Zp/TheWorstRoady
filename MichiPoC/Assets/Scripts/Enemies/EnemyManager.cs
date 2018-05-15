@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public AttackType AttackType;
-    public float respawnTime;
     public GameObject Blood;
-
-    private float tmpRespawnTime;
-    private bool dead = false;
+    public bool Dead { get; set; }
+    public EnemyEnableDisableComponents EnemyEnableDisableComponents;
+    public Vector2 FlyAwayOnDeathForce;
+    
     private Color _originalColor;
 
     private void Start()
@@ -17,43 +16,25 @@ public class EnemyManager : MonoBehaviour
         _originalColor = GetComponent<Renderer>().material.color;
     }
 
-    public void Die()
+    public void Die(Vector2 positionOfAttacker)
     {
-        this.tmpRespawnTime = this.respawnTime;
-        this.dead = true;
-        GetComponent<Renderer>().material.color = new Color(0, 0, 0, 0.3f);
+        Dead = true;
+        GetComponent<Renderer>().material.color = new Color(1, .7f, .7f, 0.5f);
+        EventSystem.Instance.DecrementEnemiesInLevel();
+
         Blood.SetActive(true);
         StartCoroutine(StopBlood());
-    }
 
-    private void Update()
-    {
-        if (this.Dead)
-        {
-            tmpRespawnTime -= Time.deltaTime;
-            if (tmpRespawnTime <= 0.0f)
-            {
-                respawn();
-            }
-        }
-    }
+        EnemyEnableDisableComponents.RemoveComponentsOnDeath();
 
-    private void respawn()
-    {
-        this.dead = false;
-        GetComponent<Renderer>().material.color = _originalColor;
-    }
-    public bool Dead
-    {
-        get
-        {
-            return dead;
-        }
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
-        set
-        {
-            dead = value;
-        }
+        float direction = positionOfAttacker.x > transform.position.x ? -1 : 1;
+
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(FlyAwayOnDeathForce.x * direction, FlyAwayOnDeathForce.y));
+        GetComponent<Rigidbody2D>().AddTorque(100, ForceMode2D.Force);
+
+        gameObject.layer = LayerMask.NameToLayer("DoNotCollideWithPlayerOrEnemies");
     }
 
     private IEnumerator StopBlood()

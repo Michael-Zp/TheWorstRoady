@@ -52,15 +52,20 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D[] hits = new RaycastHit2D[100];
         ContactFilter2D filter = new ContactFilter2D();
         Physics2D.Raycast(position, direction, filter, hits, 0.05f);
+        hits = Physics2D.RaycastAll(position, direction, 0.05f, gameObject.layer);
 
         bool hitSomething = false;
 
         foreach(var hit in hits)
         {
-            if(hit.collider != null && hit.collider.gameObject.tag != "Player")
+            //Debug.Log("Hit " + hit.collider.gameObject.name);
+            if (hit.collider != null && hit.collider.gameObject.tag != "Player" && hit.collider.GetComponent<Collider2D>() != null)
             {
-                //Debug.Log("Hit " + hit.collider.gameObject.name);
-                hitSomething = true;
+                if(!hit.collider.GetComponent<Collider2D>().isTrigger)
+                {
+                    //Debug.Log("Hit " + hit.collider.gameObject.name);
+                    hitSomething = true;
+                }
             }
         }
 

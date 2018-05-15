@@ -1,19 +1,42 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyEnableDisableComponents : MonoBehaviour
 {
+    public void RemoveComponentsOnDeath()
+    {
+        foreach (BoxCollider2D comp in GetComponents<BoxCollider2D>())
+        {
+            if (comp.isTrigger)
+            {
+                Destroy(comp);
+            }
+        }
+
+        foreach(MonoBehaviour comp in GetComponents<MonoBehaviour>())
+        {
+            if(comp.GetType() != typeof(EnemyManager))
+            {
+                Destroy(comp);
+            }
+        }
+
+        //Destroy(GetComponent<EnemyMovement>());
+        //Destroy(GetComponent<AttackPlayer>());
+        //Destroy(GetComponent<EnemyManager>());
+        //Destroy(GetComponent<EnemyEnableDisableComponents>());
+    }
+
     public void DisableComponentsOnSpawn()
     {
-        SetEnabledOnComponents(false);
+        SetEnabledOnSpawnComponents(false);
     }
 
     public void EnableComponentsFromSpawn()
     {
-        SetEnabledOnComponents(true);
+        SetEnabledOnSpawnComponents(true);
     }
 
-    private void SetEnabledOnComponents(bool state)
+    private void SetEnabledOnSpawnComponents(bool state)
     {
         foreach (BoxCollider2D comp in GetComponents<BoxCollider2D>())
         {

@@ -70,9 +70,16 @@ public class PlayerInventory : MonoBehaviour
         HealthDisplay.DisplayHealth(0);
     }
 
-    public ItemType GetTypeOfActiveItem()
+    public bool GetTypeOfActiveItem(out ItemType type)
     {
-        return _activeItem.Type;
+        if(_activeItem != null)
+        {
+            type = _activeItem.Type;
+            return true;
+        }
+
+        type = ItemType.BlueGuitar;
+        return false;
     }
 
 

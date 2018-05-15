@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CheckForFloorHit : MonoBehaviour
 {
     public Rigidbody2D Rigidbody;
     public EnemyEnableDisableComponents ReenableComponents;
 
+    private bool _isEnabled = false;
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(Rigidbody.velocity.y <= 0 && collision.gameObject.tag == "Floor")
+        if(!_isEnabled && Rigidbody.velocity.y <= 0 && collision.gameObject.tag == "Floor")
         {
             ReenableComponents.EnableComponentsFromSpawn();
-            enabled = false;
+            gameObject.SetActive(false);
+            _isEnabled = true;
         }
     }
 

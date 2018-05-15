@@ -16,4 +16,13 @@ public class PlayerManager : MonoBehaviour
         EventSystem.Instance.StunPlayerEvent -= GetComponent<PlayerMovement>().StunAndKnockBack;
         EventSystem.Instance.PunchGuitarOutOfHandsEvent -= GetComponent<PlayerInventory>().PunchActiveItemOutOfHand;
     }
+
+    public bool GetActiveItem(out ItemType type)
+    {
+        if(GetComponent<PlayerInventory>().GetTypeOfActiveItem(out type))
+        {
+            return true;
+        }
+        return false;
+    }
 }

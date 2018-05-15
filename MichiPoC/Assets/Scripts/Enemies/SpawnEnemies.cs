@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnEnemies : MonoBehaviour
@@ -28,17 +27,22 @@ public class SpawnEnemies : MonoBehaviour
         {
             _nextSpawn = false;
 
-            float rotation = Random.Range(-SpawnRadiusInDegree / 2.0f, SpawnRadiusInDegree / 2.0f);
-            float force = Random.Range(SpawnForce / 2.0f, SpawnForce);
-
-            Vector2 direction = Direction.Rotate(rotation);
-
-            GameObject spawnedEnemy = Instantiate(Prefabs[Random.Range(0, Prefabs.Length)], transform.position, Quaternion.identity, RootObject);
-            spawnedEnemy.GetComponent<Rigidbody2D>().AddForce(direction * force);
-
-            spawnedEnemy.GetComponent<EnemyEnableDisableComponents>().DisableComponentsOnSpawn();
-
             StartCoroutine(WaitForSpawn());
+
+            if(EventSystem.Instance.GetHowManyEnemiesAreInLevel() < EventSystem.Instance.GetMaxEnemiesInLevel())
+            {
+                EventSystem.Instance.IncrementEnemiesInLevel();
+
+                float rotation = Random.Range(-SpawnRadiusInDegree / 2.0f, SpawnRadiusInDegree / 2.0f);
+                float force = Random.Range(SpawnForce / 2.0f, SpawnForce);
+
+                Vector2 direction = Direction.Rotate(rotation);
+
+                GameObject spawnedEnemy = Instantiate(Prefabs[Random.Range(0, Prefabs.Length)], transform.position, Quaternion.identity, RootObject);
+                spawnedEnemy.GetComponent<Rigidbody2D>().AddForce(direction * force);
+
+                spawnedEnemy.GetComponent<EnemyEnableDisableComponents>().DisableComponentsOnSpawn();
+            }
         }
     }
 

@@ -18,6 +18,7 @@ public class PickableManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("HI");
         if (_instance == null)
         {
             _instance = this;

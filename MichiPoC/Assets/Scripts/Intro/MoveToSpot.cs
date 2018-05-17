@@ -24,6 +24,8 @@ public class MoveToSpot : MonoBehaviour
             timeRatio = Mathf.Clamp01(timeRatio);
 
             transform.position = Vector3.Lerp(_originalPos, FinalSpot.position, timeRatio);
+            
+            GetComponent<Animator>().SetFloat("MoveDistance", Vector3.Distance(transform.position, FinalSpot.position));
         }
     }
 

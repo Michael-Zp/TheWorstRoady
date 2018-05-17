@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeachBubble: {fileID: 212749003447967172}
-  RateToBeFiredPerSecond: 2
+  RateToBeFiredPerSecond: 1
   WantedType: 0
 --- !u!212 &212428870414584356
 SpriteRenderer:
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: 7775e3a02753b1040a725451a9c58cdd, type: 3}
   m_Color: {r: 1, g: 0.7275862, b: 0.7275862, a: 1}
   m_FlipX: 0

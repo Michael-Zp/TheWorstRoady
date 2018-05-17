@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class MoveToSpot : MonoBehaviour
 {
@@ -45,5 +46,4 @@ public class MoveToSpot : MonoBehaviour
         _originalPos = currentPos;
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
-
 }

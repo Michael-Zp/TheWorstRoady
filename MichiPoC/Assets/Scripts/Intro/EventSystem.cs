@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EventSystem : MonoBehaviour
@@ -12,6 +13,7 @@ public class EventSystem : MonoBehaviour
     public delegate void VoidStringHandler(string arg);
     public delegate void VoidVector3Handler(Vector3 arg);
     public delegate int IntVoidHandler();
+    public delegate List<Vector4> ListVector4VoidHandler();
 
     //Events
     public event VoidVoidHandler GuitarOfPlayerDestroyedEvent;
@@ -81,7 +83,16 @@ public class EventSystem : MonoBehaviour
     public event VoidVoidHandler DecrementEnemiesInLevelEvent;
     public void DecrementEnemiesInLevel() { if (DecrementEnemiesInLevelEvent != null) DecrementEnemiesInLevelEvent(); }
 
-    
+
+
+    public event VoidVector3Handler AddBloodSplatterEvent;
+    public void AddBloodSplatter(Vector3 arg) { if (AddBloodSplatterEvent != null) AddBloodSplatterEvent(arg); }
+
+    public event ListVector4VoidHandler GetBloodSplattersEvent;
+    public List<Vector4> GetBloodSplatters() { if (GetBloodSplattersEvent != null) return GetBloodSplattersEvent(); return new List<Vector4>() { new Vector4(-100, -100, -100, -100) }; }
+
+    public event IntVoidHandler GetBloodSplatterCountEvent;
+    public int GetBloodSplatterCount() { if (GetBloodSplatterCountEvent != null) return GetBloodSplatterCountEvent(); return 0; }
 
 
     //Singleton

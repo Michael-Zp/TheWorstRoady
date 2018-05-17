@@ -16,6 +16,15 @@ public class EnemyManager : MonoBehaviour
         _originalColor = GetComponent<Renderer>().material.color;
     }
 
+    private void Update()
+    {
+        if(transform.position.y < -20)
+        {
+            Destroy(gameObject);
+            EventSystem.Instance.DecrementEnemiesInLevel();
+        }
+    }
+
     public void Die(Vector2 positionOfAttacker)
     {
         Dead = true;
@@ -33,6 +42,8 @@ public class EnemyManager : MonoBehaviour
 
         GetComponent<Rigidbody2D>().AddForce(new Vector2(FlyAwayOnDeathForce.x * direction, FlyAwayOnDeathForce.y));
         GetComponent<Rigidbody2D>().AddTorque(100, ForceMode2D.Force);
+
+        GetComponent<BoxCollider2D>().size /= 4;
 
         gameObject.layer = LayerMask.NameToLayer("DoNotCollideWithPlayerOrEnemies");
     }

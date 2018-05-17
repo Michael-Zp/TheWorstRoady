@@ -52,20 +52,18 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D[] hits = new RaycastHit2D[100];
         ContactFilter2D filter = new ContactFilter2D();
         Physics2D.Raycast(position, direction, filter, hits, 0.05f);
-        hits = Physics2D.RaycastAll(position, direction, 0.05f, gameObject.layer);
+        hits = Physics2D.RaycastAll(position, direction, 0.05f);
 
         bool hitSomething = false;
 
         foreach(var hit in hits)
         {
-            //Debug.Log("Hit " + hit.collider.gameObject.name);
-            if (hit.collider != null && hit.collider.gameObject.tag != "Player" && hit.collider.GetComponent<Collider2D>() != null)
+            Debug.Log("Hit 1" + hit.collider.gameObject.name);
+            //Somehow the layer mask does not fking work. Workaround with the layer != DoNotCollide Layer
+            if (hit.collider != null && hit.collider.gameObject.tag != "Player" && !hit.collider.isTrigger && hit.collider.gameObject.layer != LayerMask.NameToLayer("DoNotCollideWithPlayerOrEnemies"))
             {
-                if(!hit.collider.GetComponent<Collider2D>().isTrigger)
-                {
-                    //Debug.Log("Hit " + hit.collider.gameObject.name);
-                    hitSomething = true;
-                }
+                Debug.Log("Hit 2" + hit.collider.gameObject.name);
+                hitSomething = true;
             }
         }
 

@@ -91,6 +91,9 @@ public class EventSystem : MonoBehaviour
     public event ListVector4VoidHandler GetBloodSplattersEvent;
     public List<Vector4> GetBloodSplatters() { if (GetBloodSplattersEvent != null) return GetBloodSplattersEvent(); return new List<Vector4>() { new Vector4(-100, -100, -100, -100) }; }
 
+    public event ListVector4VoidHandler GetBloodSplatterPatternsEvent;
+    public List<Vector4> GetBloodSplatterPatterns() { if (GetBloodSplatterPatternsEvent != null) return GetBloodSplatterPatternsEvent(); return new List<Vector4>() { new Vector4(-100, -100, -100, -100) }; }
+
     public event IntVoidHandler GetBloodSplatterCountEvent;
     public int GetBloodSplatterCount() { if (GetBloodSplatterCountEvent != null) return GetBloodSplatterCountEvent(); return 0; }
 

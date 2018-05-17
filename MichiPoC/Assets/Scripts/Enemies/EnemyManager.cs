@@ -32,7 +32,6 @@ public class EnemyManager : MonoBehaviour
         EventSystem.Instance.DecrementEnemiesInLevel();
 
         Blood.SetActive(true);
-        StartCoroutine(StopBlood());
 
         EnemyEnableDisableComponents.RemoveComponentsOnDeath();
 
@@ -46,12 +45,5 @@ public class EnemyManager : MonoBehaviour
         GetComponent<BoxCollider2D>().size /= 4;
 
         gameObject.layer = LayerMask.NameToLayer("DoNotCollideWithPlayerOrEnemies");
-    }
-
-    private IEnumerator StopBlood()
-    {
-        yield return new WaitForSeconds(0.4f);
-
-        Blood.SetActive(false);
     }
 }

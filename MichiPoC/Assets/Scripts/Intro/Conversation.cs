@@ -56,6 +56,8 @@ public class Conversation : MonoBehaviour
         _dialogStrings.Add(new DialogString(FriendlyBoss, "Then walk to \nthem by pressing \n[A] or [D] and jump \nby pressing [W]."));
         _dialogStrings.Add(new DialogString(FriendlyBoss, "At the moment \nyou are close \nenough just press \n[Space] to hit them."));
         _dialogStrings.Add(new DialogString(FriendlyBoss, "Hitting them will \nalso bring you \ncloser to being \nfired, so be \ncautious."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "Also try not \nnot to touch the \ngroupies."));
+        _dialogStrings.Add(new DialogString(FriendlyBoss, "They might be \npissed and hit \nyou back or even \ndestroy the \nguitar."));
         _dialogStrings.Add(new DialogString(MeanBoss, "You were the worst \nhere you little fucker, \nbut try to be the \nworst roady the \nworld has ever \nseen out there."));
         _dialogStrings.Add(new DialogString(MeanBoss, "Then go and \ndon`t fuck it up. \nOr no fuck it up \nbig time, but \nfor them."));
 

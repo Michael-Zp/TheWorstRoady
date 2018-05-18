@@ -49,7 +49,7 @@ public class Conversation : MonoBehaviour
 
     private void Start()
     {
-        _dialogStrings.Add(new DialogString(MeanBoss, "..."));
+        _dialogStrings.Add(new DialogString(MeanBoss, "... [Press \nany key to \ncontinue]"));
         _dialogStrings.Add(new DialogString(MeanBoss, "Hey Roady you \nlazy fuck. Get \nover here.", "Start"));
         _dialogStrings.Add(new DialogString(MeanBoss, "Honestly you \nare the worst \nRoady we ever \nhad on our stage."));
         _dialogStrings.Add(new DialogString(MeanBoss, "You always \nbring our stuff \nfrom backstage a \nsplit second before \nwe need it."));

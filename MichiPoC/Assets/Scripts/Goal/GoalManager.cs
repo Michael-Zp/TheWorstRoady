@@ -3,26 +3,15 @@
 public class GoalManager : MonoBehaviour
 {
     public SpriteRenderer SpeachBubble;
-    public int RateToBeFiredPerSecond;
     public ItemType WantedType;
 
     private Color _defaultColor;
-    private float _lastIncreaseOfFireRate;
 
     void Awake()
     {
         _defaultColor = SpeachBubble.color;
-        _lastIncreaseOfFireRate = Time.time;
     }
 
-    void LateUpdate()
-    {
-        if(Time.time - _lastIncreaseOfFireRate > 1.0f)
-        {
-            _lastIncreaseOfFireRate = Time.time;
-            EventSystem.Instance.GetCloserToBeFired(RateToBeFiredPerSecond);
-        }
-    }
 
     public void GiveItem(ItemType type)
     {

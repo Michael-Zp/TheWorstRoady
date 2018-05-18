@@ -9,7 +9,9 @@ public class LevelManager : MonoBehaviour
     public int MaxFanBase;
     public int CurrentFanBase;
     public int CurrentRateToBeFired;
+    public int RateToBeFiredPerSecond;
 
+    private float _lastIncreaseOfFireRate;
     private bool _lastFanBaseChangeWasPositive;
     private bool _lastRateToBeFiredChangeWasPositive;
 
@@ -38,6 +40,15 @@ public class LevelManager : MonoBehaviour
     {
         EventSystem.Instance.UpdateScareOfFanBaseUI((float)CurrentFanBase / (float)MaxFanBase, _lastFanBaseChangeWasPositive);
         EventSystem.Instance.UpdateGetCloserToBeFiredUI((float)CurrentRateToBeFired / 100f, _lastRateToBeFiredChangeWasPositive);
+    }
+
+    void LateUpdate()
+    {
+        if (Time.time - _lastIncreaseOfFireRate > 1.0f)
+        {
+            _lastIncreaseOfFireRate = Time.time;
+            EventSystem.Instance.GetCloserToBeFired(RateToBeFiredPerSecond);
+        }
     }
 
     private void FanBaseIsScaredOf(int numberOfFans)
